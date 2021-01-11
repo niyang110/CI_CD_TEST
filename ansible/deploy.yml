@@ -1,0 +1,6 @@
+- name: deploy demo
+  hosts: @HOST_GROUP@
+  gather_facts: no
+  remote_user: root
+  roles:
+    - demo

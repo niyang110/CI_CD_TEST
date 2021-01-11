@@ -1,0 +1,26 @@
+- name: create web_home directory
+  file: 
+    path: /opt/web_home 
+    state: directory
+    mode: 0755
+
+- name: copy static file
+  copy: 
+    src: /etc/ansible/roles/demo/file/index.html
+    dest: /opt/web_home/index.html
+    mode: 0755
+
+- name: pull nginx image
+  shell: "docker pull nginx"
+
+- name: test
+  shell: "docker ps |grep mynginx |wc -l"
+  register: nginx_info
+  ignore_errors: yes
+
+- name: test1
+  debug:
+    var: nginx_info
+
+- name:  start nginx
+  shell: "docker stop mynginx;docker rm mynginx;docker run -idt --name mynginx -p 8082:80 -v /opt/web_home:/usr/share/nginx/html nginx"

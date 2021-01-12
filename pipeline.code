@@ -31,7 +31,7 @@ pipeline {
                 script {
                     if (params.CHOICES == 'dev') {
                         dir(env.WORKSPACE) {
-                            sh "rm -rf /etc/ansible/roles/demo && cp -rf ansible/demo /etc/ansible/roles/demo"
+                            sh "mkdir -p /etc/ansible/roles/ &> /dev/null && rm -rf /etc/ansible/roles/demo && cp -rf ansible/demo /etc/ansible/roles/demo"
                             sh "sed -i 's/@HOST_GROUP@/dev/g' ansible/deploy.yml"
                             sh "/usr/bin/ansible-playbook -i ansible/host ansible/deploy.yml"
                         }
@@ -44,7 +44,7 @@ pipeline {
                 script {
                     if (params.CHOICES == 'master') {
                         dir(env.WORKSPACE) {
-                            sh "rm -rf /etc/ansible/roles/demo && cp -rf ansible/demo /etc/ansible/roles/demo"
+                            sh "mkdir -p /etc/ansible/roles/ &> /dev/null && rm -rf /etc/ansible/roles/demo && cp -rf ansible/demo /etc/ansible/roles/demo"
                             sh "sed -i 's/@HOST_GROUP@/master/g' ansible/deploy.yml"
                             sh "/usr/bin/ansible-playbook -i ansible/host ansible/deploy.yml"
                         }

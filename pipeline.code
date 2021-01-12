@@ -14,7 +14,7 @@ pipeline {
         stage('拉代码') {
             steps {
                 dir(env.WORKSPACE) {
-                    checkout([$class: 'GitSCM', branches: [[name: "*/${params.CHOICES}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'gitlab_user_login', url: 'http://192.168.3.14:8080/root/ci_cd_test.git']]])
+                    checkout([$class: 'GitSCM', branches: [[name: "*/${params.CHOICES}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github_user_login', url: 'https://github.com/niyang110/CI_CD_TEST.git']]])
                 }
             }
         }
